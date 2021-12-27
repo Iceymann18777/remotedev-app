@@ -1,17 +1,17 @@
-import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
-import shallowCompare from 'react/lib/shallowCompare';
-import { selectInstance } from '../actions';
-import styles from '../styles';
+import React, { Component, PropTypes } from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import SelectField from "material-ui/SelectField";
+import MenuItem from "material-ui/MenuItem";
+import shallowCompare from "react/lib/shallowCompare";
+import { selectInstance } from "../actions";
+import styles from "../styles";
 
 class Instances extends Component {
   static propTypes = {
     selected: PropTypes.string,
     instances: PropTypes.object.isRequired,
-    onSelect: PropTypes.func.isRequired
+    onSelect: PropTypes.func.isRequired,
   };
 
   shouldComponentUpdate(nextProps) {
@@ -19,10 +19,10 @@ class Instances extends Component {
   }
 
   render() {
-    this.select = [['Autoselect instances', null]];
+    this.select = [["Autoselect instances", null]];
     const instances = this.props.instances;
     let name;
-    Object.keys(instances).forEach(key => {
+    Object.keys(instances).forEach((key) => {
       name = instances[key].name;
       if (name !== undefined) this.select.push([instances[key].name, key]);
     });
@@ -35,11 +35,9 @@ class Instances extends Component {
         onChange={this.props.onSelect}
         value={this.props.selected}
       >
-        {
-          this.select.map(
-            option => <MenuItem key={option[1]} value={option[1]} primaryText={option[0]} />
-          )
-        }
+        {this.select.map((option) => (
+          <MenuItem key={option[1]} value={option[1]} primaryText={option[0]} />
+        ))}
       </SelectField>
     );
   }
@@ -47,13 +45,13 @@ class Instances extends Component {
 
 function mapStateToProps(state) {
   return {
-    instances: state.instances.options
+    instances: state.instances.options,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    onSelect: bindActionCreators(selectInstance, dispatch)
+    onSelect: bindActionCreators(selectInstance, dispatch),
   };
 }
 

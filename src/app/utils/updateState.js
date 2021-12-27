@@ -1,26 +1,39 @@
-import commitExcessActions from './commitExcessActions';
+import commitExcessActions from "./commitExcessActions";
 
-export function recompute(previousLiftedState, storeState, action, nextActionId = 1, maxAge, isExcess) {
+export function recompute(
+  previousLiftedState,
+  storeState,
+  action,
+  nextActionId = 1,
+  maxAge,
+  isExcess
+) {
   const actionId = nextActionId - 1;
   const liftedState = { ...previousLiftedState };
 
-  if (liftedState.currentStateIndex === liftedState.stagedActionIds.length - 1) {
+  if (
+    liftedState.currentStateIndex ===
+    liftedState.stagedActionIds.length - 1
+  ) {
     liftedState.currentStateIndex++;
   }
   liftedState.stagedActionIds = [...liftedState.stagedActionIds, actionId];
   liftedState.actionsById = { ...liftedState.actionsById };
-  if (action.type === 'PERFORM_ACTION') {
+  if (action.type === "PERFORM_ACTION") {
     liftedState.actionsById[actionId] = action;
   } else {
     liftedState.actionsById[actionId] = {
       action: action.action || action,
       timestamp: action.timestamp || Date.now(),
       stack: action.stack,
-      type: 'PERFORM_ACTION'
+      type: "PERFORM_ACTION",
     };
   }
   liftedState.nextActionId = nextActionId;
-  liftedState.computedStates = [...liftedState.computedStates, { state: storeState }];
+  liftedState.computedStates = [
+    ...liftedState.computedStates,
+    { state: storeState },
+  ];
 
   if (isExcess) commitExcessActions(liftedState);
   else if (maxAge) {

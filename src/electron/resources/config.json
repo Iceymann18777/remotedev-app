@@ -1,5 +1,5 @@
 {
-  "osx" : {
+  "osx": {
     "title": "RemoteDev",
     "background": "osx/installer.png",
     "icon": "osx/icon.icns",
@@ -9,9 +9,9 @@
       { "x": 1, "y": 1, "type": "file" }
     ]
   },
-  "win" : {
-    "title" : "RemoteDev",
-    "version" : "0.0.0.1",
-    "icon" : "windows/icon.ico"
+  "win": {
+    "title": "RemoteDev",
+    "version": "0.0.0.1",
+    "icon": "windows/icon.ico"
   }
 }

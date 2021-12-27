@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react';
-import { format } from 'jsondiffpatch/src/formatters/html';
-import styled from 'styled-components';
+import React, { Component, PropTypes } from "react";
+import { format } from "jsondiffpatch/src/formatters/html";
+import styled from "styled-components";
 
 export const StyledContainer = styled.div`
   .jsondiffpatch-delta {
@@ -18,7 +18,7 @@ export const StyledContainer = styled.div`
     padding: 2px 3px;
     border-radius: 3px;
     position: relative;
-    color: #FFFFFF;
+    color: #ffffff;
     display: inline-block;
   }
 
@@ -34,27 +34,28 @@ export const StyledContainer = styled.div`
     margin: 0;
   }
 
-  .jsondiffpatch-left-value, .jsondiffpatch-right-value {
+  .jsondiffpatch-left-value,
+  .jsondiffpatch-right-value {
     vertical-align: top;
   }
 
   .jsondiffpatch-modified .jsondiffpatch-right-value:before {
     vertical-align: top;
     padding: 2px;
-    color: #D381C3;
-    content: ' => ';
+    color: #d381c3;
+    content: " => ";
   }
 
   .jsondiffpatch-added .jsondiffpatch-value pre,
   .jsondiffpatch-modified .jsondiffpatch-right-value pre,
   .jsondiffpatch-textdiff-added {
-    background: rgba(161, 198 ,89, 0.4);
+    background: rgba(161, 198, 89, 0.4);
   }
 
   .jsondiffpatch-deleted pre,
   .jsondiffpatch-modified .jsondiffpatch-left-value pre,
   .jsondiffpatch-textdiff-deleted {
-    background: rgba(251, 159 ,177, 0.4);
+    background: rgba(251, 159, 177, 0.4);
     text-decoration: line-through;
   }
 
@@ -71,27 +72,39 @@ export const StyledContainer = styled.div`
   }
 
   .jsondiffpatch-unchanged-showing .jsondiffpatch-unchanged,
-  .jsondiffpatch-unchanged-showing .jsondiffpatch-movedestination > .jsondiffpatch-value {
+  .jsondiffpatch-unchanged-showing
+    .jsondiffpatch-movedestination
+    > .jsondiffpatch-value {
     max-height: 100px;
   }
 
   .jsondiffpatch-unchanged-hidden .jsondiffpatch-unchanged,
-  .jsondiffpatch-unchanged-hidden .jsondiffpatch-movedestination > .jsondiffpatch-value {
+  .jsondiffpatch-unchanged-hidden
+    .jsondiffpatch-movedestination
+    > .jsondiffpatch-value {
     max-height: 0;
   }
 
-  .jsondiffpatch-unchanged-hiding .jsondiffpatch-movedestination > .jsondiffpatch-value,
-  .jsondiffpatch-unchanged-hidden .jsondiffpatch-movedestination > .jsondiffpatch-value {
+  .jsondiffpatch-unchanged-hiding
+    .jsondiffpatch-movedestination
+    > .jsondiffpatch-value,
+  .jsondiffpatch-unchanged-hidden
+    .jsondiffpatch-movedestination
+    > .jsondiffpatch-value {
     display: block;
   }
 
   .jsondiffpatch-unchanged-visible .jsondiffpatch-unchanged,
-  .jsondiffpatch-unchanged-visible .jsondiffpatch-movedestination > .jsondiffpatch-value {
+  .jsondiffpatch-unchanged-visible
+    .jsondiffpatch-movedestination
+    > .jsondiffpatch-value {
     max-height: 100px;
   }
 
   .jsondiffpatch-unchanged-hiding .jsondiffpatch-unchanged,
-  .jsondiffpatch-unchanged-hiding .jsondiffpatch-movedestination > .jsondiffpatch-value {
+  .jsondiffpatch-unchanged-hiding
+    .jsondiffpatch-movedestination
+    > .jsondiffpatch-value {
     max-height: 0;
   }
 
@@ -113,50 +126,50 @@ export const StyledContainer = styled.div`
   }
 
   .jsondiffpatch-property-name:after {
-    content: ': ';
-    color: #FFFFFF;
+    content: ": ";
+    color: #ffffff;
   }
 
   .jsondiffpatch-child-node-type-array > .jsondiffpatch-property-name:after {
-    content: ': [';
+    content: ": [";
   }
 
   .jsondiffpatch-child-node-type-array:after {
-    content: '],';
+    content: "],";
   }
 
   div.jsondiffpatch-child-node-type-array:before {
-    content: '[';
+    content: "[";
   }
 
   div.jsondiffpatch-child-node-type-array:after {
-    content: ']';
+    content: "]";
   }
 
   .jsondiffpatch-child-node-type-object > .jsondiffpatch-property-name:after {
-    content: ': {';
+    content: ": {";
   }
 
   .jsondiffpatch-child-node-type-object:after {
-    content: '},';
+    content: "},";
   }
 
   div.jsondiffpatch-child-node-type-object:before {
-    content: '{';
+    content: "{";
   }
 
   div.jsondiffpatch-child-node-type-object:after {
-    content: '}';
+    content: "}";
   }
 
   .jsondiffpatch-value pre:after {
-    color: #FFFFFF;
-    content: ',';
+    color: #ffffff;
+    content: ",";
   }
 
   li:last-child > .jsondiffpatch-value pre:after,
   .jsondiffpatch-modified > .jsondiffpatch-left-value pre:after {
-    content: '';
+    content: "";
   }
 
   .jsondiffpatch-modified .jsondiffpatch-value {
@@ -178,7 +191,7 @@ export const StyledContainer = styled.div`
   }
 
   .jsondiffpatch-moved .jsondiffpatch-moved-destination:before {
-    content: ' => ';
+    content: " => ";
   }
 
   ul.jsondiffpatch-textdiff {
@@ -196,8 +209,8 @@ export const StyledContainer = styled.div`
   }
 
   .jsondiffpatch-textdiff-line-number:after {
-    color: #FFFFFF;
-    content: ',';
+    color: #ffffff;
+    content: ",";
   }
 
   .jsondiffpatch-error {
@@ -224,5 +237,5 @@ export default class VisualDiffTab extends Component {
 }
 
 VisualDiffTab.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.object,
 };

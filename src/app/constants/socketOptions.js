@@ -1,12 +1,12 @@
 const socketOptions = {
-  hostname: 'remotedev.io',
+  hostname: "remotedev.io",
   port: 443,
-  protocol: 'https',
+  protocol: "https",
   autoReconnect: true,
   secure: true,
   autoReconnectOptions: {
-    randomness: 30000
-  }
+    randomness: 30000,
+  },
 };
 
 export default socketOptions;

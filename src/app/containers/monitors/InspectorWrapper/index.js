@@ -1,20 +1,24 @@
-import React, { Component, PropTypes } from 'react';
-import InspectorMonitor from 'remotedev-inspector-monitor';
-import StackTraceTab from 'redux-devtools-trace-monitor';
-import { DATA_TYPE_KEY } from '../../../constants/dataTypes';
-import SubTabs from './SubTabs';
-import TestTab from './TestTab';
+import React, { Component, PropTypes } from "react";
+import InspectorMonitor from "remotedev-inspector-monitor";
+import StackTraceTab from "redux-devtools-trace-monitor";
+import { DATA_TYPE_KEY } from "../../../constants/dataTypes";
+import SubTabs from "./SubTabs";
+import TestTab from "./TestTab";
 
-const DEFAULT_TABS = [{
-  name: 'Action',
-  component: SubTabs
-}, {
-  name: 'State',
-  component: SubTabs
-}, {
-  name: 'Diff',
-  component: SubTabs
-}];
+const DEFAULT_TABS = [
+  {
+    name: "Action",
+    component: SubTabs,
+  },
+  {
+    name: "State",
+    component: SubTabs,
+  },
+  {
+    name: "Diff",
+    component: SubTabs,
+  },
+];
 
 class InspectorWrapper extends Component {
   static update = InspectorMonitor.update;
@@ -22,8 +26,12 @@ class InspectorWrapper extends Component {
   render() {
     const { lib, ...rest } = this.props;
     let tabs;
-    if (lib === 'redux') {
-      tabs = () => [...DEFAULT_TABS, { name: 'Trace', component: StackTraceTab }, { name: 'Test', component: TestTab }];
+    if (lib === "redux") {
+      tabs = () => [
+        ...DEFAULT_TABS,
+        { name: "Trace", component: StackTraceTab },
+        { name: "Test", component: TestTab },
+      ];
     } else {
       tabs = () => DEFAULT_TABS;
     }
@@ -42,7 +50,7 @@ class InspectorWrapper extends Component {
 }
 
 InspectorWrapper.propTypes = {
-  lib: PropTypes.string
+  lib: PropTypes.string,
 };
 
 export default InspectorWrapper;

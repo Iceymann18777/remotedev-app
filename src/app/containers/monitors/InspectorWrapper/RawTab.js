@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react';
-import { Editor } from 'remotedev-monitor-components';
-import stringify from 'javascript-stringify';
+import React, { Component, PropTypes } from "react";
+import { Editor } from "remotedev-monitor-components";
+import stringify from "javascript-stringify";
 
 export default class RawTab extends Component {
   constructor(props) {
@@ -21,8 +21,6 @@ export default class RawTab extends Component {
   }
 
   render() {
-    return (
-      <Editor theme="night" value={this.value} />
-    );
+    return <Editor theme="night" value={this.value} />;
   }
 }

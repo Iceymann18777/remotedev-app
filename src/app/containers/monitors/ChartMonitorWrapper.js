@@ -1,17 +1,17 @@
-import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import ChartMonitor from 'redux-devtools-chart-monitor';
-import { selectMonitorWithState } from '../../actions';
+import React, { Component, PropTypes } from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import ChartMonitor from "redux-devtools-chart-monitor";
+import { selectMonitorWithState } from "../../actions";
 
 export const tooltipOptions = {
   style: {
-    'background-color': '#ffffff',
-    'color': '#000000',
-    'opacity': '0.9',
-    'border-radius': '5px',
-    'padding': '5px'
-  }
+    "background-color": "#ffffff",
+    color: "#000000",
+    opacity: "0.9",
+    "border-radius": "5px",
+    padding: "5px",
+  },
 };
 
 export function getPath(obj, inspectedStatePath) {
@@ -30,20 +30,21 @@ class ChartMonitorWrapper extends Component {
   onClickText = (data) => {
     const inspectedStatePath = [];
     getPath(data, inspectedStatePath);
-    this.props.selectMonitorWithState('InspectorMonitor', {
+    this.props.selectMonitorWithState("InspectorMonitor", {
       inspectedStatePath,
-      tabName: 'State',
-      subTabName: data.children ? 'Chart' : 'Tree',
+      tabName: "State",
+      subTabName: data.children ? "Chart" : "Tree",
       selectedActionId: null,
       startActionId: null,
-      inspectedActionPath: []
+      inspectedActionPath: [],
     });
   };
 
   render() {
     return (
       <ChartMonitor
-        defaultIsVisible invertTheme
+        defaultIsVisible
+        invertTheme
         tooltipOptions={tooltipOptions}
         onClickText={this.onClickText}
         {...this.props}
@@ -53,12 +54,15 @@ class ChartMonitorWrapper extends Component {
 }
 
 ChartMonitorWrapper.propTypes = {
-  selectMonitorWithState: PropTypes.func.isRequired
+  selectMonitorWithState: PropTypes.func.isRequired,
 };
 
 function mapDispatchToProps(dispatch) {
   return {
-    selectMonitorWithState: bindActionCreators(selectMonitorWithState, dispatch)
+    selectMonitorWithState: bindActionCreators(
+      selectMonitorWithState,
+      dispatch
+    ),
   };
 }
 

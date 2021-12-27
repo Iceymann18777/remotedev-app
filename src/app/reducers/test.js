@@ -1,8 +1,13 @@
-import { TEST_ADD, TEST_EDIT, TEST_REMOVE, TEST_SELECT } from '../constants/actionTypes';
+import {
+  TEST_ADD,
+  TEST_EDIT,
+  TEST_REMOVE,
+  TEST_SELECT,
+} from "../constants/actionTypes";
 
 const initialState = {
   selected: 0,
-  templates: undefined
+  templates: undefined,
 };
 
 export default function monitor(state = initialState, action) {
@@ -18,17 +23,20 @@ export default function monitor(state = initialState, action) {
       return {
         ...state,
         selected: state.templates.length,
-        templates: [...(state.templates || action.templates), action.template]
+        templates: [...(state.templates || action.templates), action.template],
       };
     case TEST_REMOVE:
       templates = state.templates || action.templates;
       return {
         ...state,
         selected: 0,
-        templates: templates.length === 1 ? undefined : [
-          ...templates.slice(0, state.selected),
-          ...templates.slice(state.selected + 1)
-        ]
+        templates:
+          templates.length === 1
+            ? undefined
+            : [
+                ...templates.slice(0, state.selected),
+                ...templates.slice(state.selected + 1),
+              ],
       };
     default:
       return state;

@@ -1,13 +1,13 @@
-import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { tree } from 'd3-state-visualizer';
-import { tooltipOptions, getPath } from '../ChartMonitorWrapper';
-import { updateMonitorState } from '../../../actions';
+import React, { Component, PropTypes } from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { tree } from "d3-state-visualizer";
+import { tooltipOptions, getPath } from "../ChartMonitorWrapper";
+import { updateMonitorState } from "../../../actions";
 
 const style = {
-  width: '100%',
-  height: '100%'
+  width: "100%",
+  height: "100%",
 };
 
 const defaultOptions = {
@@ -16,34 +16,34 @@ const defaultOptions = {
   tooltipOptions: {
     ...tooltipOptions,
     offset: { left: 30, top: 10 },
-    indentationSize: 2
+    indentationSize: 2,
   },
   style: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
     node: {
       colors: {
-        'default': '#A1C659',
-        collapsed: '#A1C659',
-        parent: '#D381C3'
+        default: "#A1C659",
+        collapsed: "#A1C659",
+        parent: "#D381C3",
       },
-      radius: 7
+      radius: 7,
     },
     text: {
       colors: {
-        'default': '#6FB3D2',
-        hover: '#FFFFFF'
-      }
-    }
-  }
+        default: "#6FB3D2",
+        hover: "#FFFFFF",
+      },
+    },
+  },
 };
 
 class ChartTab extends Component {
   componentDidMount() {
-    this.renderChart = tree(
-      this.node,
-      { ...defaultOptions, onClickText: this.onClickText }
-    );
+    this.renderChart = tree(this.node, {
+      ...defaultOptions,
+      onClickText: this.onClickText,
+    });
     this.renderChart(this.props.data);
   }
 
@@ -53,7 +53,7 @@ class ChartTab extends Component {
     }
   }
 
-  getRef = node => {
+  getRef = (node) => {
     this.node = node;
   };
 
@@ -62,7 +62,7 @@ class ChartTab extends Component {
     getPath(data, inspectedStatePath);
     this.props.updateMonitorState({
       inspectedStatePath,
-      subTabName: data.children ? 'Chart' : 'Tree'
+      subTabName: data.children ? "Chart" : "Tree",
     });
   };
 
@@ -73,12 +73,12 @@ class ChartTab extends Component {
 
 ChartTab.propTypes = {
   data: PropTypes.object,
-  updateMonitorState: PropTypes.func.isRequired
+  updateMonitorState: PropTypes.func.isRequired,
 };
 
 function mapDispatchToProps(dispatch) {
   return {
-    updateMonitorState: bindActionCreators(updateMonitorState, dispatch)
+    updateMonitorState: bindActionCreators(updateMonitorState, dispatch),
   };
 }
 

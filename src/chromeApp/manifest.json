@@ -13,5 +13,5 @@
       "page": "background.html"
     }
   },
-  "permissions": [ "storage" ]
+  "permissions": ["storage"]
 }

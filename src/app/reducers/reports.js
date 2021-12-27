@@ -1,7 +1,7 @@
-import { UPDATE_REPORTS, GET_REPORT_SUCCESS } from '../constants/actionTypes';
+import { UPDATE_REPORTS, GET_REPORT_SUCCESS } from "../constants/actionTypes";
 
 const initialState = {
-  data: []
+  data: [],
 };
 
 export default function reports(state = initialState, action) {
@@ -16,20 +16,20 @@ export default function reports(state = initialState, action) {
   const request = action.request;
   const data = request.data;
   switch (request.type) {
-    case 'list':
+    case "list":
       return {
         ...state,
-        data
+        data,
       };
-    case 'add':
+    case "add":
       return {
         ...state,
-        data: [...state.data, data]
+        data: [...state.data, data],
       };
-    case 'remove':
+    case "remove":
       return {
         ...state,
-        data: state.data.filter(d => d.id !== request.id)
+        data: state.data.filter((d) => d.id !== request.id),
       };
     default:
       return state;

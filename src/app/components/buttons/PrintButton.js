@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react';
-import PrintIcon from 'react-icons/lib/md/print';
-import Button from '../Button';
+import React, { Component, PropTypes } from "react";
+import PrintIcon from "react-icons/lib/md/print";
+import Button from "../Button";
 
 export default class PrintButton extends Component {
   shouldComponentUpdate() {
@@ -8,7 +8,7 @@ export default class PrintButton extends Component {
   }
 
   handlePrint() {
-    const d3svg = document.getElementById('d3svg');
+    const d3svg = document.getElementById("d3svg");
     if (!d3svg) {
       window.print();
       return;
@@ -21,19 +21,24 @@ export default class PrintButton extends Component {
     d3svg.style.width = box.width;
 
     const g = d3svg.firstChild;
-    const initTransform = g.getAttribute('transform');
-    g.setAttribute('transform', initTransform.replace(/.+scale\(/, 'translate(57, 10) scale('));
+    const initTransform = g.getAttribute("transform");
+    g.setAttribute(
+      "transform",
+      initTransform.replace(/.+scale\(/, "translate(57, 10) scale(")
+    );
 
     window.print();
 
     d3svg.style.height = initHeight;
     d3svg.style.width = initWidth;
-    g.setAttribute('transform', initTransform);
+    g.setAttribute("transform", initTransform);
   }
 
   render() {
     return (
-      <Button Icon={PrintIcon} onClick={this.handlePrint}>Print</Button>
+      <Button Icon={PrintIcon} onClick={this.handlePrint}>
+        Print
+      </Button>
     );
   }
 }
