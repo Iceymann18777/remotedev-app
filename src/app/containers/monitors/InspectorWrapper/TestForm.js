@@ -1,8 +1,8 @@
-import React, { Component, PropTypes } from 'react';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import TextField from 'material-ui/TextField';
-import styles from '../../../styles';
+import React, { Component, PropTypes } from "react";
+import Dialog from "material-ui/Dialog";
+import FlatButton from "material-ui/FlatButton";
+import TextField from "material-ui/TextField";
+import styles from "../../../styles";
 
 export default class TestForm extends Component {
   constructor(props) {
@@ -37,15 +37,18 @@ export default class TestForm extends Component {
         style={styles.flatButton}
       />,
       <FlatButton
-        label={dialogStatus === 1 ? 'Save' : 'Add'}
-        primary keyboardFocused
+        label={dialogStatus === 1 ? "Save" : "Add"}
+        primary
+        keyboardFocused
         onTouchTap={this.save}
         labelStyle={styles.buttonLabel}
         style={styles.flatButton}
-      />
+      />,
     ];
     if (dialogStatus === 1) {
-      actions.splice(1, 0,
+      actions.splice(
+        1,
+        0,
         <FlatButton
           label="Remove"
           primary
@@ -58,7 +61,7 @@ export default class TestForm extends Component {
 
     return (
       <Dialog
-        title={dialogStatus === 1 ? 'Edit template' : 'Add new template'}
+        title={dialogStatus === 1 ? "Edit template" : "Add new template"}
         actions={actions}
         modal={false}
         open={!!dialogStatus}
@@ -83,7 +86,8 @@ export default class TestForm extends Component {
           hintStyle={styles.hint}
           inputStyle={styles.input}
           defaultValue={dispatcher}
-          multiLine fullWidth
+          multiLine
+          fullWidth
           onChange={this.handleInputChange}
         />
         <TextField
@@ -95,7 +99,8 @@ export default class TestForm extends Component {
           hintStyle={styles.hint}
           inputStyle={styles.input}
           defaultValue={assertion}
-          multiLine fullWidth
+          multiLine
+          fullWidth
           onChange={this.handleInputChange}
         />
         <TextField
@@ -107,7 +112,8 @@ export default class TestForm extends Component {
           hintStyle={styles.hint}
           inputStyle={styles.input}
           defaultValue={wrap}
-          multiLine fullWidth
+          multiLine
+          fullWidth
           onChange={this.handleInputChange}
         />
       </Dialog>
@@ -120,5 +126,5 @@ TestForm.propTypes = {
   template: PropTypes.object,
   onSave: PropTypes.func,
   onRemove: PropTypes.func,
-  onClose: PropTypes.func
+  onClose: PropTypes.func,
 };

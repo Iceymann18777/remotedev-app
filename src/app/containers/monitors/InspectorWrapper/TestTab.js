@@ -1,24 +1,29 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
-import Button from '../../../components/Button';
-import AddButton from 'react-icons/lib/md/add';
-import EditButton from 'react-icons/lib/md/edit';
-import TestGenerator from 'redux-devtools-test-generator';
-import jestTemplate from 'redux-devtools-test-generator/lib/redux/jest/template';
-import mochaTemplate from 'redux-devtools-test-generator/lib/redux/mocha/template';
-import tapeTemplate from 'redux-devtools-test-generator/lib/redux/tape/template';
-import avaTemplate from 'redux-devtools-test-generator/lib/redux/ava/template';
+import React, { Component, PropTypes } from "react";
+import { connect } from "react-redux";
+import SelectField from "material-ui/SelectField";
+import MenuItem from "material-ui/MenuItem";
+import Button from "../../../components/Button";
+import AddButton from "react-icons/lib/md/add";
+import EditButton from "react-icons/lib/md/edit";
+import TestGenerator from "redux-devtools-test-generator";
+import jestTemplate from "redux-devtools-test-generator/lib/redux/jest/template";
+import mochaTemplate from "redux-devtools-test-generator/lib/redux/mocha/template";
+import tapeTemplate from "redux-devtools-test-generator/lib/redux/tape/template";
+import avaTemplate from "redux-devtools-test-generator/lib/redux/ava/template";
 /*
 import mochaVTemplate from 'redux-devtools-test-generator/lib/vanilla/mocha/template';
 import tapeVTemplate from 'redux-devtools-test-generator/lib/vanilla/tape/template';
 import avaVTemplate from 'redux-devtools-test-generator/lib/vanilla/ava/template';
 */
-import { TEST_ADD, TEST_EDIT, TEST_REMOVE, TEST_SELECT } from '../../../constants/actionTypes';
-import { getActiveInstance } from '../../../reducers/instances';
-import TestForm from './TestForm';
-import styles from '../../../styles';
+import {
+  TEST_ADD,
+  TEST_EDIT,
+  TEST_REMOVE,
+  TEST_SELECT,
+} from "../../../constants/actionTypes";
+import { getActiveInstance } from "../../../reducers/instances";
+import TestForm from "./TestForm";
+import styles from "../../../styles";
 
 class TestTab extends Component {
   constructor(props) {
@@ -82,12 +87,15 @@ class TestTab extends Component {
 
     return (
       <TestGenerator
-        isVanilla={this.props.options.lib !== 'redux'}
+        isVanilla={this.props.options.lib !== "redux"}
         name={this.props.options.name}
-        assertion={assertion} dispatcher={dispatcher} wrap={wrap}
-        theme="night" useCodemirror
+        assertion={assertion}
+        dispatcher={dispatcher}
+        wrap={wrap}
+        theme="night"
+        useCodemirror
         header={
-          <div style={{ height: '2.5em', minHeight: '2.5em', display: 'flex' }}>
+          <div style={{ height: "2.5em", minHeight: "2.5em", display: "flex" }}>
             <SelectField
               style={styles.select}
               labelStyle={styles.selectLabel}
@@ -95,18 +103,20 @@ class TestTab extends Component {
               onChange={this.onSelect}
               value={selected}
             >
-              {templates.map((item, i) =>
+              {templates.map((item, i) => (
                 <MenuItem key={i} value={i} primaryText={item.name} />
-              )}
+              ))}
             </SelectField>
             <Button Icon={EditButton} onClick={this.editTemplate} />
             <Button Icon={AddButton} onClick={this.addTemplate} />
-            <TestForm { ...{
-              template, dialogStatus,
-              onSave: this.handleSave,
-              onRemove: this.handleRemove,
-              onClose: this.handleCloseDialog
-            } }
+            <TestForm
+              {...{
+                template,
+                dialogStatus,
+                onSave: this.handleSave,
+                onRemove: this.handleRemove,
+                onClose: this.handleCloseDialog,
+              }}
             />
           </div>
         }
@@ -120,7 +130,7 @@ TestTab.propTypes = {
   templates: PropTypes.array,
   selected: PropTypes.number,
   options: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -128,7 +138,7 @@ function mapStateToProps(state) {
   return {
     templates: state.test.templates,
     selected: state.test.selected,
-    options: instances.options[getActiveInstance(instances)]
+    options: instances.options[getActiveInstance(instances)],
   };
 }
 

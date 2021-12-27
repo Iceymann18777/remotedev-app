@@ -1,14 +1,14 @@
-import stringifyJSON from '../utils/stringifyJSON';
-import { UPDATE_STATE, LIFTED_ACTION, EXPORT } from '../constants/actionTypes';
-import { getActiveInstance } from '../reducers/instances';
+import stringifyJSON from "../utils/stringifyJSON";
+import { UPDATE_STATE, LIFTED_ACTION, EXPORT } from "../constants/actionTypes";
+import { getActiveInstance } from "../reducers/instances";
 let toExport;
 
 function download(state) {
-  const blob = new Blob([state], { type: 'octet/stream' });
+  const blob = new Blob([state], { type: "octet/stream" });
   const href = window.URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.style = 'display: none';
-  a.download = 'state.json';
+  const a = document.createElement("a");
+  a.style = "display: none";
+  a.download = "state.json";
   a.href = href;
   document.body.appendChild(a);
   a.click();
@@ -18,17 +18,28 @@ function download(state) {
   }, 0);
 }
 
-const exportState = store => next => action => {
+const exportState = (store) => (next) => (action) => {
   const result = next(action);
 
-  if (toExport && action.type === UPDATE_STATE && action.request.type === 'EXPORT') {
+  if (
+    toExport &&
+    action.type === UPDATE_STATE &&
+    action.request.type === "EXPORT"
+  ) {
     const request = action.request;
     const id = request.instanceId || request.id;
     if (id === toExport) {
       toExport = undefined;
-      download(JSON.stringify({
-        payload: request.payload, preloadedState: request.committedState
-      }, null, '\t'));
+      download(
+        JSON.stringify(
+          {
+            payload: request.payload,
+            preloadedState: request.committedState,
+          },
+          null,
+          "\t"
+        )
+      );
     }
   } else if (action.type === EXPORT) {
     const instances = store.getState().instances;
@@ -38,7 +49,7 @@ const exportState = store => next => action => {
       download(stringifyJSON(instances.states[instanceId], options.serialize));
     } else {
       toExport = instanceId;
-      next({ type: LIFTED_ACTION, message: 'EXPORT', toExport: true });
+      next({ type: LIFTED_ACTION, message: "EXPORT", toExport: true });
     }
   }
   return result;

@@ -1,10 +1,10 @@
-import { combineReducers } from 'redux';
-import socket from './socket';
-import monitor from './monitor';
-import notification from './notification';
-import instances from './instances';
-import test from './test';
-import reports from './reports';
+import { combineReducers } from "redux";
+import socket from "./socket";
+import monitor from "./monitor";
+import notification from "./notification";
+import instances from "./instances";
+import test from "./test";
+import reports from "./reports";
 
 const rootReducer = combineReducers({
   socket,
@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
   instances,
   test,
   reports,
-  notification
+  notification,
 });
 
 export default rootReducer;

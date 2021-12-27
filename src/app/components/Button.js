@@ -1,10 +1,10 @@
 // Based on https://github.com/gaearon/redux-devtools-log-monitor/blob/master/src/LogMonitorButton.js
 
-import React, { Component, PropTypes } from 'react';
-import shallowCompare from 'react/lib/shallowCompare';
-import * as themes from 'redux-devtools-themes';
-import brighten from 'redux-devtools-log-monitor/lib/brighten';
-import styles from '../styles';
+import React, { Component, PropTypes } from "react";
+import shallowCompare from "react/lib/shallowCompare";
+import * as themes from "redux-devtools-themes";
+import brighten from "redux-devtools-log-monitor/lib/brighten";
+import styles from "../styles";
 
 export default class Button extends React.Component {
   static propTypes = {
@@ -16,15 +16,12 @@ export default class Button extends React.Component {
     onMouseUp: PropTypes.func,
     Icon: PropTypes.func.isRequired,
     children: PropTypes.node,
-    theme: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.string
-    ])
+    theme: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   };
 
   static defaultProps = {
     theme: themes.nicinabox,
-    enabled: true
+    enabled: true,
   };
 
   constructor(props) {
@@ -35,7 +32,7 @@ export default class Button extends React.Component {
     this.onClick = this.onClick.bind(this);
 
     this.state = {
-      hovered: false
+      hovered: false,
     };
   }
 
@@ -61,27 +58,37 @@ export default class Button extends React.Component {
   }
 
   render() {
-    const { theme, enabled, href, download, Icon, children, onMouseDown, onMouseUp } = this.props;
+    const {
+      theme,
+      enabled,
+      href,
+      download,
+      Icon,
+      children,
+      onMouseDown,
+      onMouseUp,
+    } = this.props;
     let style = {
       ...styles.button,
-      backgroundColor: theme.base02
+      backgroundColor: theme.base02,
     };
     if (enabled && this.state.hovered) {
       style = {
         ...style,
-        backgroundColor: brighten(theme.base02, 0.2)
+        backgroundColor: brighten(theme.base02, 0.2),
       };
     }
     if (!enabled) {
       style = {
         ...style,
         opacity: 0.2,
-        cursor: 'text',
-        backgroundColor: 'transparent'
+        cursor: "text",
+        backgroundColor: "transparent",
       };
     }
     return (
-      <a onMouseEnter={this.handleMouseEnter}
+      <a
+        onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
         onMouseDown={onMouseDown}
         onMouseUp={onMouseUp}

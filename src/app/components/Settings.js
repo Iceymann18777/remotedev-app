@@ -1,12 +1,12 @@
-import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import Checkbox from 'material-ui/Checkbox';
-import TextField from 'material-ui/TextField';
-import { saveSocketSettings } from '../actions';
-import styles from '../styles';
+import React, { Component, PropTypes } from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import Dialog from "material-ui/Dialog";
+import FlatButton from "material-ui/FlatButton";
+import Checkbox from "material-ui/Checkbox";
+import TextField from "material-ui/TextField";
+import { saveSocketSettings } from "../actions";
+import styles from "../styles";
 
 class Settings extends Component {
   static propTypes = {
@@ -14,7 +14,7 @@ class Settings extends Component {
     close: PropTypes.func.isRequired,
     saveSettings: PropTypes.func.isRequired,
     socketOptions: PropTypes.object.isRequired,
-    isCustom: PropTypes.bool
+    isCustom: PropTypes.bool,
   };
 
   constructor(props) {
@@ -26,8 +26,8 @@ class Settings extends Component {
       this.options.port = props.socketOptions.port;
       this.options.secure = props.socketOptions.secure;
     } else {
-      this.options.hostname = 'localhost';
-      this.options.port = '8000';
+      this.options.hostname = "localhost";
+      this.options.port = "8000";
       this.options.secure = false;
     }
 
@@ -55,16 +55,13 @@ class Settings extends Component {
     const { isOpen, close } = this.props;
 
     const actions = [
-      <FlatButton
-        label="Cancel"
-        primary
-        onTouchTap={close}
-      />,
+      <FlatButton label="Cancel" primary onTouchTap={close} />,
       <FlatButton
         label="Submit"
-        primary keyboardFocused
+        primary
+        keyboardFocused
         onTouchTap={this.save}
-      />
+      />,
     ];
 
     return (
@@ -82,26 +79,29 @@ class Settings extends Component {
           checked={this.state.isCustom}
           onCheck={this.handleLocalChecked}
         />
-        {this.state.isCustom && <div>
-          <TextField
-            id="hostname"
-            floatingLabelText="Host name"
-            defaultValue={this.options.hostname}
-            onChange={this.handleInputChange}
-          />
-          <TextField
-            id="port"
-            floatingLabelText="Port"
-            defaultValue={this.options.port}
-            onChange={this.handleInputChange}
-          /><br/>
-          <Checkbox
-            id="secure"
-            label="Use secure connection"
-            defaultChecked={this.options.secure}
-            onCheck={this.handleCheckboxChange}
-          />
-        </div>}
+        {this.state.isCustom && (
+          <div>
+            <TextField
+              id="hostname"
+              floatingLabelText="Host name"
+              defaultValue={this.options.hostname}
+              onChange={this.handleInputChange}
+            />
+            <TextField
+              id="port"
+              floatingLabelText="Port"
+              defaultValue={this.options.port}
+              onChange={this.handleInputChange}
+            />
+            <br />
+            <Checkbox
+              id="secure"
+              label="Use secure connection"
+              defaultChecked={this.options.secure}
+              onCheck={this.handleCheckboxChange}
+            />
+          </div>
+        )}
       </Dialog>
     );
   }
@@ -110,13 +110,13 @@ class Settings extends Component {
 function mapStateToProps(state) {
   return {
     socketOptions: state.socket.options,
-    isCustom: state.socket.isCustom
+    isCustom: state.socket.isCustom,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    saveSettings: bindActionCreators(saveSocketSettings, dispatch)
+    saveSettings: bindActionCreators(saveSocketSettings, dispatch),
   };
 }
 

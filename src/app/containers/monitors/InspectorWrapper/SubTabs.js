@@ -1,14 +1,14 @@
-import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { Tabs } from 'remotedev-monitor-components';
-import StateTree from 'remotedev-inspector-monitor/lib/tabs/StateTab';
-import ActionTree from 'remotedev-inspector-monitor/lib/tabs/ActionTab';
-import DiffTree from 'remotedev-inspector-monitor/lib/tabs/DiffTab';
-import { selectMonitorTab } from '../../../actions';
-import RawTab from './RawTab';
-import ChartTab from './ChartTab';
-import VisualDiffTab from './VisualDiffTab';
+import React, { Component, PropTypes } from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { Tabs } from "remotedev-monitor-components";
+import StateTree from "remotedev-inspector-monitor/lib/tabs/StateTab";
+import ActionTree from "remotedev-inspector-monitor/lib/tabs/ActionTab";
+import DiffTree from "remotedev-inspector-monitor/lib/tabs/DiffTab";
+import { selectMonitorTab } from "../../../actions";
+import RawTab from "./RawTab";
+import ChartTab from "./ChartTab";
+import VisualDiffTab from "./VisualDiffTab";
 
 class SubTabs extends Component {
   constructor(props) {
@@ -24,9 +24,9 @@ class SubTabs extends Component {
 
   selector = () => {
     switch (this.props.parentTab) {
-      case 'Action':
+      case "Action":
         return { data: this.props.action };
-      case 'Diff':
+      case "Diff":
         return { data: this.props.delta };
       default:
         return { data: this.props.nextState };
@@ -36,44 +36,45 @@ class SubTabs extends Component {
   updateTabs(props) {
     const parentTab = props.parentTab;
 
-    if (parentTab === 'Diff') {
+    if (parentTab === "Diff") {
       this.tabs = [
         {
-          name: 'Tree',
+          name: "Tree",
           component: DiffTree,
-          selector: () => this.props
+          selector: () => this.props,
         },
         {
-          name: 'Raw',
+          name: "Raw",
           component: VisualDiffTab,
-          selector: this.selector
-        }
+          selector: this.selector,
+        },
       ];
       return;
     }
 
     this.tabs = [
       {
-        name: 'Tree',
-        component: parentTab === 'Action' ? ActionTree : StateTree,
-        selector: () => this.props
+        name: "Tree",
+        component: parentTab === "Action" ? ActionTree : StateTree,
+        selector: () => this.props,
       },
       {
-        name: 'Chart',
+        name: "Chart",
         component: ChartTab,
-        selector: this.selector
+        selector: this.selector,
       },
       {
-        name: 'Raw',
+        name: "Raw",
         component: RawTab,
-        selector: this.selector
-      }
+        selector: this.selector,
+      },
     ];
   }
 
   render() {
     let selected = this.props.selected;
-    if (selected === 'Chart' && this.props.parentTab === 'Diff') selected = 'Tree';
+    if (selected === "Chart" && this.props.parentTab === "Diff")
+      selected = "Tree";
 
     return (
       <Tabs
@@ -91,19 +92,19 @@ SubTabs.propTypes = {
   selectMonitorTab: PropTypes.func.isRequired,
   action: PropTypes.object,
   delta: PropTypes.object,
-  nextState: PropTypes.object
+  nextState: PropTypes.object,
 };
 
 function mapStateToProps(state) {
   return {
     parentTab: state.monitor.monitorState.tabName,
-    selected: state.monitor.monitorState.subTabName
+    selected: state.monitor.monitorState.subTabName,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    selectMonitorTab: bindActionCreators(selectMonitorTab, dispatch)
+    selectMonitorTab: bindActionCreators(selectMonitorTab, dispatch),
   };
 }
 

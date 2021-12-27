@@ -1,5 +1,5 @@
-import React, { Component, PropTypes, createElement } from 'react';
-import getMonitor from '../utils/getMonitor';
+import React, { Component, PropTypes, createElement } from "react";
+import getMonitor from "../utils/getMonitor";
 
 export default class DevTools extends Component {
   constructor(props) {
@@ -25,10 +25,10 @@ export default class DevTools extends Component {
         }
       }
       this.dispatch({
-        type: '@@INIT_MONITOR',
+        type: "@@INIT_MONITOR",
         newMonitorState,
         update,
-        monitorProps: this.monitorProps
+        monitorProps: this.monitorProps,
       });
     }
   }
@@ -37,7 +37,8 @@ export default class DevTools extends Component {
     if (
       nextProps.monitor !== this.props.monitor ||
       nextProps.lib !== this.props.lib
-    ) this.getMonitor(nextProps);
+    )
+      this.getMonitor(nextProps);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -49,7 +50,7 @@ export default class DevTools extends Component {
     );
   }
 
-  dispatch = action => {
+  dispatch = (action) => {
     this.props.dispatch(action);
   };
 
@@ -61,7 +62,7 @@ export default class DevTools extends Component {
 
     const liftedState = {
       ...this.props.liftedState,
-      monitorState: this.props.monitorState
+      monitorState: this.props.monitorState,
     };
     return (
       <this.Monitor
@@ -78,5 +79,5 @@ DevTools.propTypes = {
   monitorState: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
   monitor: PropTypes.string,
-  lib: PropTypes.string
+  lib: PropTypes.string,
 };
