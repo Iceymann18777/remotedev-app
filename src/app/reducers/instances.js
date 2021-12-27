@@ -181,8 +181,7 @@ function removeState(state, connectionId) {
     }
     if (id === current) {
       const inst = Object.keys(connections)[0];
-      if (inst) current = connections[inst][0];
-      else current = 'default';
+      current = inst ? connections[inst][0] : 'default';
     }
     delete options[id];
     delete states[id];
